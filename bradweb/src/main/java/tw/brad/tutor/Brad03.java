@@ -24,7 +24,7 @@ public class Brad03 extends HttpServlet {
 		}
 		
 		PrintWriter out = response.getWriter();
-		out.print("Hello1");
+		out.print("Hello2");
 		
 		
 	}
