@@ -40,6 +40,7 @@ public class Brad04 extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		System.out.println("service(2)");
+		System.out.println(req.getMethod());
 		//super.service(req, resp);
 	}
 
@@ -47,4 +48,9 @@ public class Brad04 extends HttpServlet {
 		System.out.println("doGet()");
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("doPost()");
+	}
+	
 }
