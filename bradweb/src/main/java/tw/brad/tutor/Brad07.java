@@ -15,10 +15,15 @@ public class Brad07 extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String account = request.getParameter("account");
 		String passwd = request.getParameter("passwd");
+		boolean isMale = request.getParameter("gender").equals("m");
+		String[] hobby = request.getParameterValues("hobby");
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.printf("%s : %s", account, passwd);
+		out.printf("%s : %s : %s<br />", account, passwd, isMale?"Male":"Female");
+		for (String hh : hobby) {
+			out.println(hh);
+		}
 		response.flushBuffer();
 	}
 
