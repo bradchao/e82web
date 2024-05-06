@@ -26,7 +26,15 @@ public class Brad14 extends HttpServlet {
 		// 2. 運算
 		MyModel myModel = new MyModel(x, y);
 		String result = myModel.plus();
-		request.setAttribute("result", result);
+		if (x == null && y == null) {
+			request.setAttribute("result", "");
+			request.setAttribute("x", "");
+			request.setAttribute("y", "");			
+		}else {
+			request.setAttribute("result", result);
+			request.setAttribute("x", x);
+			request.setAttribute("y", y);
+		}
 		
 		// 3. 呈現 View
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Brad15");
