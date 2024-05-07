@@ -36,10 +36,14 @@ public class Register extends HttpServlet {
 		String realname = request.getParameter("realname");
 		
 		try {
-			if (memberDB.addNew(account, passwd, realname)>0) {
-				response.sendRedirect("brad24.jsp");
+			if (!memberDB.isAccountExist(account)) {
+				if (memberDB.addNew(account, passwd, realname)>0) {
+					response.sendRedirect("brad24.jsp");
+				}else {
+					response.sendRedirect("brad23.jsp?errType=1");
+				}
 			}else {
-				response.sendRedirect("brad23.html");
+				response.sendRedirect("brad23.jsp?errType=2");
 			}
 		}catch(Exception e) {
 			response.sendError(500, "Server Busy");
