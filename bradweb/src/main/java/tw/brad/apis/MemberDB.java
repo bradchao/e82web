@@ -11,7 +11,7 @@ public class MemberDB {
 	private static final String USER = "root";
 	private static final String PASSWD = "root";
 	private static final String URL = "jdbc:mysql://localhost/iii";
-	private static final String QUERY_SQL = "SELECT * FROM member";
+	private static final String CHECK_SQL = "SELECT count(*) count FROM member WHERE account = ?";
 	private static final String INSERT_SQL = 
 		"INSERT INTO member (account,passwd,realname) VALUES (?,?,?)";
 	private Connection conn;
@@ -33,5 +33,14 @@ public class MemberDB {
 		pstmt.setString(3, realname);
 		return pstmt.executeUpdate();
 	}
+	
+	public boolean isAccountExist(String account) throws Exception {
+		PreparedStatement pstmt = conn.prepareStatement(CHECK_SQL);
+		pstmt.setString(1, account);
+		rs = pstmt.executeQuery();
+		rs.next();
+		return rs.getInt("count") > 0; 
+	}
+	
 	
 }
