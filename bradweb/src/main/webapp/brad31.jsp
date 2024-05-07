@@ -13,6 +13,10 @@
 	<body>
 		Member1 :
 		<jsp:getProperty property="account" name="member" /> :
-		<jsp:getProperty property="realname" name="member" /> <br />
+		<jsp:getProperty property="realname" name="member" /> <hr />
+		Member1 : ${member.account } : ${member.realname }
+		<hr />
+		${member }<br />
+		${Math.random() }
 	</body>
 </html>

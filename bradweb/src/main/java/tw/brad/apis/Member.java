@@ -29,6 +29,9 @@ public class Member {
 		return account;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return account + ":" + realname;
+	}
 	
 }
