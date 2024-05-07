@@ -47,7 +47,8 @@ public class Brad18 extends HttpServlet {
 		try {
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + key + "%");
+			if (key != null) pstmt.setString(1, "%" + key + "%");
+			
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				out.print("<tr>");
