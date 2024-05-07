@@ -40,6 +40,9 @@ public class Brad18 extends HttpServlet {
 		
 		String key = request.getParameter("key");
 		String sql = "SELECT * FROM food WHERE name LIKE ?";
+		if (key == null) {
+			sql = "SELECT * FROM food";
+		}
 		
 		try {
 			
