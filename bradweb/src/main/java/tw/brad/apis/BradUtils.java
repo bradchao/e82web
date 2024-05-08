@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class BradUtils {
 	public static String loadView(String view) throws Exception {
@@ -43,5 +48,19 @@ public class BradUtils {
 		return (int)(Math.random()*101);
 	}
 	
+	public static LinkedList<HashMap<String, String>> parseTravel(String data){
+		LinkedList<HashMap<String, String>> items = new LinkedList<HashMap<String,String>>();
+		JSONArray root = new JSONArray(data);
+		for (int i=0; i<root.length(); i++) {
+			JSONObject row = root.getJSONObject(i);
+			HashMap<String, String> item = new HashMap<String, String>();
+			item.put("name", row.getString("Name"));
+			item.put("city", row.getString("City"));
+			item.put("town", row.getString("Town"));
+			items.add(item);
+		}
+		
+		return items;
+	}
 	
 }
