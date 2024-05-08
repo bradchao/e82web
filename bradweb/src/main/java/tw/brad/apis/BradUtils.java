@@ -39,4 +39,9 @@ public class BradUtils {
 		}
 	}
 	
+	public static int createScore() {
+		return (int)(Math.random()*101);
+	}
+	
+	
 }
