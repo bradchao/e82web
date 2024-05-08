@@ -9,18 +9,9 @@
 	password="root"
 />
 
-<c:choose>
-	<c:when test="${!empty param.key }">
-		<sql:query var="rs">
-			SELECT * FROM food WHERE name LIKE '%${param.key }%' 
-		</sql:query>	
-	</c:when>
-	<c:otherwise>
-		<sql:query var="rs">
-			SELECT * FROM food
-		</sql:query>	
-	</c:otherwise>
-</c:choose>
+<sql:query var="rs">
+	SELECT * FROM food
+</sql:query>
 
 <!DOCTYPE html>
 <html>
@@ -31,16 +22,6 @@
 	<body>
 		<h1>美食小吃列表</h1>
 		<hr />
-		${rs.rowCount }<br />
-		<c:forEach items="${rs.columnNames }" var="column">
-			${column }<br />
-		</c:forEach>
-		<hr />
-		
-		<form>
-			Keyword: <input name="key" value="${param.key }"/>
-			<input type="submit" value="Serach" />
-		</form>
 		
 		<table border="1" width="100%">
 			<tr>
@@ -48,7 +29,6 @@
 				<th>id</th>
 				<th>名稱</th>
 				<th>電話</th>
-				<th>照片</th>
 			</tr>
 			
 			<c:forEach items="${rs.rows }" var="food" varStatus="status">
@@ -57,7 +37,6 @@
 					<td>${food.id }</td>
 					<td>${food.name }</td>
 					<td>${food.tel }</td>
-					<td><img src="${food.picurl }" width="160px" height="90px" /></td>
 				</tr>			
 			</c:forEach>
 			
