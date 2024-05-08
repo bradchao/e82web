@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -13,6 +15,17 @@
 	String[] name4 = {"Brad4","Mark4","Peter4", "Kevin4"};
 	application.setAttribute("key1", name4);
 	
+	LinkedList<String> list = new LinkedList<>();
+	pageContext.setAttribute("list", list);
+	list.add("AA");list.add("BB");list.add("CC");list.add("DD");
+	
+	HashMap<String,Object> map = new HashMap<>();
+	pageContext.setAttribute("person", map);
+	map.put("name", "Brad");
+	map.put("gender", true);
+	map.put("age", 18);
+	map.put("weight", 78.4);
+	
 	
 %>
 
@@ -27,5 +40,8 @@
 		request:key1[2] = ${requestScope.key1[2] }<br />
 		session:key1[2] = ${sessionScope.key1[2] }<br />
 		application:key1[2] = ${applicationScope.key1[2] }<br />
+		<hr />
+		${list[2] }<br />
+		${person.name } : ${person["age"] }
 	</body>
 </html>
