@@ -9,18 +9,12 @@
 	password="root"
 />
 
-<c:choose>
-	<c:when test="${!empty param.key }">
-		<sql:query var="rs">
-			SELECT * FROM food WHERE name LIKE '%${param.key }%' 
-		</sql:query>	
-	</c:when>
-	<c:otherwise>
-		<sql:query var="rs">
-			SELECT * FROM food
-		</sql:query>	
-	</c:otherwise>
-</c:choose>
+<c:set var="sql">SELECT * FROM food</c:set>
+<c:if test="${!empty param.key }">
+	<c:set var="sql">${sql } WHERE name LIKE '%${param.key }%'</c:set>
+</c:if>
+<sql:query var="rs">${sql }</sql:query>
+
 
 <!DOCTYPE html>
 <html>
