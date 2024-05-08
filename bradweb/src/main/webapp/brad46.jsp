@@ -8,10 +8,15 @@
 	user="root"
 	password="root"
 />
-
+<c:set var="page">${empty param.page?1:param.page }</c:set>
+<c:set var="rpp">10</c:set>
+<c:set var="start">${(page - 1) * rpp }</c:set>
 <sql:query var="rs">
-	SELECT * FROM food
+	SELECT * FROM food LIMIT ${start }, ${rpp }
 </sql:query>
+<c:set var="prev">${page == 1 ? 1 : page - 1 }</c:set>
+<c:set var="next">${page + 1 }</c:set>
+
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +27,8 @@
 	<body>
 		<h1>美食小吃列表</h1>
 		<hr />
-		
+		<a href="?page=${prev }">Prev</a> | <a href="?page=${next }">Next</a>
+		<hr />
 		<table border="1" width="100%">
 			<tr>
 				<th>#</th>
