@@ -10,12 +10,14 @@
 	user="root"
 	password="root"
 />
-<c:set var="travel">${BradUtils.parseTravel(data) }</c:set>
-<c:forEach items="${travel }" var="item">
+<sql:update>DELETE FROM travel</sql:update>
+<sql:update>ALTER TABLE travel AUTO_INCREMENT = 1</sql:update>
+<c:set var="travel" value="${BradUtils.parseTravel(data) }"></c:set>
+<c:forEach items="${travel }" var="row">
 	<sql:update>
 		INSERT INTO travel (name,city,town) VALUES (?,?,?)
-		<sql:param></sql:param>
-		<sql:param></sql:param>
-		<sql:param></sql:param>
+		<sql:param>${row["name"] }</sql:param>
+		<sql:param>${row.city }</sql:param>
+		<sql:param>${row.town }</sql:param>
 	</sql:update>
 </c:forEach>

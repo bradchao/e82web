@@ -51,6 +51,7 @@ public class BradUtils {
 	public static LinkedList<HashMap<String, String>> parseTravel(String data){
 		LinkedList<HashMap<String, String>> items = new LinkedList<HashMap<String,String>>();
 		JSONArray root = new JSONArray(data);
+		System.out.println("debug1:" + root.length());
 		for (int i=0; i<root.length(); i++) {
 			JSONObject row = root.getJSONObject(i);
 			HashMap<String, String> item = new HashMap<String, String>();
@@ -58,7 +59,9 @@ public class BradUtils {
 			item.put("city", row.getString("City"));
 			item.put("town", row.getString("Town"));
 			items.add(item);
+			System.out.println(row.getString("Name"));
 		}
+		System.out.println(items.size());
 		
 		return items;
 	}
