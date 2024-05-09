@@ -34,6 +34,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script>
+			function isDel(delname){
+				var isDel = confirm("是否刪除 [" + delname + "] ?");
+				return isDel;
+			}
+		</script>
 	</head>
 	<body>
 	Main Page
@@ -49,7 +55,7 @@
 				<td>${travel.name }</td>
 				<td>${travel.city }</td>
 				<td>${travel.town }</td>
-				<td><a href="?delid=${travel.id }">Delete</a></td>
+				<td><a href="?delid=${travel.id }" onclick="return isDel('${travel.name }');">Delete</a></td>
 			</tr>
 		</c:forEach>
 	</table>
