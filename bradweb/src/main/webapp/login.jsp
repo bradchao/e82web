@@ -19,6 +19,12 @@
 			<c:set var="hashPasswd" value="${rs.rows[0].passwd }" />
 			<c:choose>
 				<c:when test="${BCrypt.checkpw(param.passwd, hashPasswd) }">
+					<jsp:useBean id="member0" class="tw.brad.apis.Member"></jsp:useBean>
+					<c:set target="${member0 }" property="id">${rs.rows[0].id }</c:set>
+					<c:set target="${member0 }" property="account">${rs.rows[0].account }</c:set>
+					<c:set target="${member0 }" property="passwd">${rs.rows[0].passwd }</c:set>
+					<c:set target="${member0 }" property="realname">${rs.rows[0].realname }</c:set>
+					<c:set var="member" value="${member0 }" scope="session" />
 					<c:redirect url="main.jsp"></c:redirect>
 				</c:when>
 				<c:otherwise>
