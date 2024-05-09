@@ -3,6 +3,12 @@
     pageEncoding="UTF-8"%>
 <%
 	Integer a = (Integer)session.getAttribute("a");
+	if (a == null){
+		//response.sendRedirect("brad50.jsp");
+		//response.sendError(403, "權限被拒");
+		return;
+	}
+	
 	int[] b = (int[])session.getAttribute("b");
 	Bike bike = (Bike)session.getAttribute("bike");
 %>
