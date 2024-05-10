@@ -88,7 +88,7 @@ public class BradUtils {
 			root.put("details", details);
 		}
 		
-		System.out.println(root.toString());
+		//System.out.println(root.toString());
 		
 		
 		return root.toString();

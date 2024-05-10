@@ -9,6 +9,24 @@
 				$.get('brad58.jsp?orderId=' + $('#orderId').val(), function(data, status){
 					if (status == 'success'){
 						console.log(data)
+						$('#oid').html(data.orderId);
+						$('#cid').html(data.customerId);
+						$('#date').html(data.date);
+						$('#table').empty();
+						
+						$(data.details).each(function(i, row){
+							$('#table').append(
+								'<tr>' + 
+									'<td>' + i + '</td>' + 
+									'<td>' + row.productId + '</td>' + 
+									'<td>' + row.productName + '</td>' + 
+									'<td>' + row.quantity + '</td>' + 
+									'<td>' + row.unitPrice + '</td>' + 
+									'<td>' + (row.unitPrice*row.quantity )+ '</td>' +
+								'</tr>'
+							);
+						});
+						
 					}
 				});				
 			}
@@ -23,7 +41,7 @@
 		OrderId: <span id="oid"></span><br />
 		CustomerId: <span id="cid"></span><br />
 		Date: <span id="date"></span><br />
-		<table id="table" width="100%"></table>
+		<table id="table" width="100%" border="1"></table>
 		
 	
 	</body>
