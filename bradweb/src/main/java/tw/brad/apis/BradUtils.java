@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.SortedMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,6 +65,33 @@ public class BradUtils {
 		System.out.println(items.size());
 		
 		return items;
+	}
+	
+	public static String Order2JSON(SortedMap[] rows) {
+		JSONObject root = new JSONObject();
+		if (rows.length >0) {
+			root.put("orderId", rows[0].getOrDefault("OrderID", ""));
+			root.put("customerId", rows[0].getOrDefault("CustomerID", ""));
+			root.put("date", rows[0].getOrDefault("OrderDate", ""));
+			
+			JSONArray details = new JSONArray();
+			for (int i=0; i<rows.length; i++) {
+				SortedMap<String, String> row = rows[i];
+				JSONObject detail = new JSONObject();
+				detail.put("productId", row.getOrDefault("ProductID", ""));
+				detail.put("productName", row.getOrDefault("ProductName", ""));
+				detail.put("unitPrice", row.getOrDefault("UnitPrice", ""));
+				detail.put("quantity", row.getOrDefault("Quantity", ""));
+				details.put(detail);
+			}
+			
+			root.put("details", details);
+		}
+		
+		System.out.println(root.toString());
+		
+		
+		return root.toString();
 	}
 	
 }

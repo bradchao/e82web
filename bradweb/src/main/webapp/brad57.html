@@ -6,9 +6,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<script>
 			function search(){
-				$.get('brad58.jsp', function(data, status){
+				$.get('brad58.jsp?orderId=' + $('#orderId').val(), function(data, status){
 					if (status == 'success'){
-						
+						console.log(data)
 					}
 				});				
 			}
