@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			function test1(){
+				$('#id1').load('brad56.jsp?max=' + $('#max').val());
+			}
+			function test2(){
+				$.get('brad56.jsp?max=' + $('#max').val(), function(data, status){
+					if (status == 'success'){
+						$('#id1').html(data);
+					}
+				});
+			}
+			function test3(){
+				$.post('brad56.jsp', {
+					"max" : $('#max').val()
+				}, function(data, status){
+					if (status == 'success'){
+						$('#id1').html(data);
+					}					
+				});
+			}
+			
+		</script>
+	
+	</head>
+	<body>
+		Lottery: <span id="id1"></span><br />
+		Max: <input type="number" id="max" /><br />
+		<input type="button" onclick="test1()" value="Test1" /><br />
+		<input type="button" onclick="test2()" value="Test2" /><br />
+		<input type="button" onclick="test3()" value="Test3" /><br />
+	</body>
+</html>
