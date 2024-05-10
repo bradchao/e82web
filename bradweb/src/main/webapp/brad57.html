@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script>
+			function search(){
+				$.get('brad58.jsp', function(data, status){
+					if (status == 'success'){
+						
+					}
+				});				
+			}
+		</script>
+		
+	</head>
+	<body>
+	
+		OrderID: <input type="text" id="orderId" />
+		<input type="button" onclick="search()" value="Search" />
+		<hr />
+		OrderId: <span id="oid"></span><br />
+		CustomerId: <span id="cid"></span><br />
+		Date: <span id="date"></span><br />
+		<table id="table" width="100%"></table>
+		
+	
+	</body>
+</html>
