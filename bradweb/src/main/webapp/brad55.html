@@ -24,7 +24,19 @@
 					}					
 				});
 			}
-			
+			function test4(){
+				$.ajax({
+					url: 'brad56.jsp',
+					method: 'post',
+					data: {
+						max : $('#max').val()
+					},
+					success: function(data){
+						$('#id1').html(data);
+					},
+					contentType: "text/plain; charset=UTF-8"
+				});
+			}
 		</script>
 	
 	</head>
@@ -34,5 +46,6 @@
 		<input type="button" onclick="test1()" value="Test1" /><br />
 		<input type="button" onclick="test2()" value="Test2" /><br />
 		<input type="button" onclick="test3()" value="Test3" /><br />
+		<input type="button" onclick="test4()" value="Test4" /><br />
 	</body>
 </html>
