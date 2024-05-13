@@ -29,10 +29,11 @@
 				canvas = document.getElementById("myDrawer");
 				ctx = canvas.getContext("2d");
 				
-				ctx.beginPath();
-				ctx.lineWidth = 4;
+
 				
 				function moveTo(){
+					ctx.beginPath();
+					ctx.lineWidth = 4;
 					ctx.moveTo(x,y);
 				}	
 				
