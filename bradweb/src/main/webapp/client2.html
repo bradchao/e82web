@@ -21,19 +21,19 @@
 				};
 				webSocket.onmessage = function(event){
 					let mesgObj = JSON.parse(event.data);
-					if (mesgObj.isNewLine){
-						moveTo(mesgObj.x, mesgObj.y);
+					if (mesgObj.isClear){
+						clear();						
 					}else{
-						drawLine(mesgObj.x, mesgObj.y);
+						if (mesgObj.isNewLine){
+							moveTo(mesgObj.x, mesgObj.y);
+						}else{
+							drawLine(mesgObj.x, mesgObj.y);
+						}
 					}
 				};				
 				
-				
-				
 				canvas = document.getElementById("myDrawer");
 				ctx = canvas.getContext("2d");
-				
-
 				
 				function moveTo(x, y){
 					ctx.beginPath();
@@ -47,7 +47,9 @@
 				}
 				
 				
-				
+				function clear(){
+					ctx.clearRect(0,0,canvas.width, canvas.height);
+				}
 				
 				
 				
@@ -57,6 +59,6 @@
 		</script>
 	</head>
 	<body>
-	<canvas id="myDrawer" width="640px" height="480px" style="border:1px solid #000;"></canvas>
+	<canvas id="myDrawer" width="640px" height="280px" style="border:1px solid #000;"></canvas>
 	</body>
 </html>

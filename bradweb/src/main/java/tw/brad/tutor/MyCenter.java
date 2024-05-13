@@ -51,6 +51,7 @@ public class MyCenter {
 			// 製作 JSONObject, 發送給 client2
 			JSONObject sendObj = new JSONObject();
 			sendObj.put("isNewLine", root.getBoolean("isNewLine"));
+			sendObj.put("isClear", root.getBoolean("isClear"));
 			sendObj.put("x", root.getInt("x"));
 			sendObj.put("y", root.getInt("y"));
 			

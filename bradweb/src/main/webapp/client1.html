@@ -43,6 +43,7 @@
 					
 					let message = {
 						init : false,
+						isClear : false,
 						isNewLine : true,
 						x : x,
 						y : y
@@ -53,7 +54,7 @@
 				};
 				
 				canvas.onmousemove = function(evt){
-					console.log(evt.clientX + ":" + evt.offsetX);
+					//console.log(evt.clientX + ":" + evt.offsetX);
 					
 					if (isDrag){
 						let x = evt.offsetX, y = evt.offsetY;
@@ -63,6 +64,7 @@
 						
 						let message = {
 							init : false,
+							isClear : false,
 							isNewLine : false,
 							x : x,
 							y : y							
@@ -76,7 +78,20 @@
 					isDrag = false;
 				}
 				
-				
+				clear = document.getElementById("clear");
+				clear.onclick = function(){
+					ctx.clearRect(0,0,canvas.width, canvas.height);
+					
+					let message = {
+							init : false,
+							isClear : true,
+							isNewLine : false,
+							x : x,
+							y : y							
+						};
+						webSocket.send(JSON.stringify(message));						
+					
+				};
 				
 				
 				
@@ -87,6 +102,8 @@
 		</script>
 	</head>
 	<body>
-	<canvas id="myDrawer" width="640px" height="480px" style="border:1px solid #000;"></canvas>
+	<button id="clear">Clear</button>
+	<hr />
+	<canvas id="myDrawer" width="640px" height="280px" style="border:1px solid #000;"></canvas>
 	</body>
 </html>
