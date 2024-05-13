@@ -20,6 +20,7 @@
 					
 				};
 				webSocket.onmessage = function(event){
+					console.log(event.data);
 					let mesgObj = JSON.parse(event.data);
 					if (mesgObj.isClear){
 						clear();						
