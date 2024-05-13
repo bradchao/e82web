@@ -7,7 +7,7 @@
 			let canvas, ctx;
 			window.onload = function(){
 				
-				let webSocket = new WebSocket("ws://10.0.103.50:8080/bradweb/mycenter");
+				let webSocket = new WebSocket("ws://10.0.103.50:8080/bradweb/myserver");
 				webSocket.onerror = function(){
 					console.log("ERROR");
 				};
@@ -17,14 +17,13 @@
 					let message = {
 						init : true
 					};
+					console.log(JSON.stringify(message));
 					webSocket.send(JSON.stringify(message));					
 				};
 				webSocket.onclose = function(){
 					console.log("CLOSE");
 					
 				};
-				webSocket.onmessage = function(event){
-				};				
 				
 				
 				
@@ -81,6 +80,7 @@
 				clear = document.getElementById("clear");
 				clear.onclick = function(){
 					ctx.clearRect(0,0,canvas.width, canvas.height);
+					ctx.beginPath();
 					
 					let message = {
 							init : false,
@@ -89,7 +89,7 @@
 							x: 0,
 							y: 0
 						};
-						webSocket.send(JSON.stringify(message));						
+					webSocket.send(JSON.stringify(message));						
 					
 				};
 				

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			window.onload = function(){
+
+				
+				var aryCookies = {};
+				parseCookie();
+				function parseCookie(){
+					var cookie = document.cookie;
+					console.log(cookie);
+					var cookies = cookie.split(";");	// []
+					cookies.forEach(function(item, i){
+						console.log(item);
+						item = item.trim().split("=");
+						
+						aryCookies[item[0].trim()] = item[1];
+						console.log("debug:" + item[0] + ":" + item[1]);
+					});
+					
+				}
+				
+				function getCookie(key){
+					return aryCookies[key];
+				}
+				
+				if (getCookie('account')){
+					document.getElementById('account').value = getCookie('account'); 
+				}
+				if (getCookie('passwd')){
+					document.getElementById('passwd').value = getCookie('passwd'); 
+				}
+				if (getCookie('remember')){
+					document.getElementById('remember').checked = getCookie('remember'); 
+				}				
+				
+				
+			}
+		
+			function beforeSubmit(){
+				let account = document.getElementById("account").value;
+				let passwd = document.getElementById("passwd").value;
+				let isRemember = document.getElementById("remember").checked;
+				
+				if (isRemember){
+					document.cookie = "account = " + account;
+					document.cookie = "passwd = " + passwd;
+					document.cookie = "remember = " + isRemember;
+				}else{
+					var cookies = document.cookie.splite(";");
+					for (var i=0; i<cookies.length; i++){
+						var setting = cookies[i].split("=");
+						document.cookie = setting[0].trim() + " = ;expires = Thu, 01 Jan 1970 00:00:00 UTC"; 
+					}
+					document.cookie = "remember = false";
+				}
+				
+				
+				
+				return true;
+			}	
+			
+
+			
+			
+			
+			
+		
+		</script>
+		
+		
+	</head>
+	<body>
+	
+		<form action="brad62.jsp" onsubmit="return beforeSubmit();">
+			Account: <input name="account" id="account" /><br />
+			Password: <input name="passwd" id="passwd" /><br />
+			<input type="checkbox" id="remember" /> Remember Me<br />
+			<input type="submit" value="Login" />
+		</form>
+	
+	</body>
+</html>

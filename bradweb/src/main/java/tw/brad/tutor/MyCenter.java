@@ -55,10 +55,13 @@ public class MyCenter {
 			sendObj.put("x", root.getInt("x"));
 			sendObj.put("y", root.getInt("y"));
 			
+			System.out.println(sendObj.toString());
+			
 			for (WSClient user : users) {
 				if (!user.isClient1()) {
 					try {
 						user.getSession().getBasicRemote().sendText(sendObj.toString());
+						System.out.println("send :" + user.getSession().getId());
 					} catch (IOException e) {
 						System.out.println(e);
 					}
