@@ -12,15 +12,17 @@ window.onload = function(){
 	});
 	
 	send.addEventListener("click",function(){
-		
-		webSocket.send("haha");
+		let message = {
+			message: mesg.value
+		};
+		webSocket.send(JSON.stringify(message));
 	});
 	
 	start.style.display = "block";
 	mesgDiv.style.display = "none";
 	
 	function connect(){
-		webSocket = new WebSocket("ws://localhost:8080/bradweb/myserver");
+		webSocket = new WebSocket("ws://10.0.103.50:8080/bradweb/myserver");
 		webSocket.onerror = function(){
 			console.log("ERROR");
 			start.style.display = "block";
@@ -38,7 +40,11 @@ window.onload = function(){
 			mesgDiv.style.display = "none";
 			
 		};
-		webSocket.onmessage = function(){};
+		webSocket.onmessage = function(event){
+			console.log(event);
+			let mesgObj = JSON.parse(event.data);
+			log.innerHTML += mesgObj.message + "<br />";
+		};
 	}
 	
 	
