@@ -1,5 +1,6 @@
-package tw.brad.websocket;
+package tw.brad.tutor;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -8,12 +9,14 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/myserver")
 public class MyServer {
-	private static HashSet<Session> sessions;
-	private static HashMap<String, Session> users;
+	private static HashSet<Session> sessions = null;
+	private static HashMap<String, Session> users = null;
 	
 	public MyServer() {
-		sessions = new HashSet<>();
-		users = new HashMap<String, Session>();
+		if (sessions == null) {
+			sessions = new HashSet<>();
+			users = new HashMap<String, Session>();
+		}
 	}
 	
 	@OnOpen
@@ -21,16 +24,28 @@ public class MyServer {
 //		if (!users.containsValue(session)) {
 //			users.put(session.getId(), session);
 //		}
-		System.out.println(session.getRequestURI().getHost());
+		//System.out.println(session.getRequest);
+		
+		session.setMaxIdleTimeout(60*60*1000);
+		
 		if (sessions.add(session)) {
 			users.put(session.getId(), session);
+			System.out.println("new session");
 		}
 		System.out.println("Count:" + sessions.size());
 	}
 	
 	@OnMessage
-	public void onMessage(String mesg, Session session) {
+	public void onMessage(String mesg, Session fromSession) {
 		System.out.println(mesg);
+		for (Session session : sessions) {
+			try {
+				session.getBasicRemote().sendText(mesg);
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+		}
+		
 	}
 	
 	@OnClose
@@ -41,7 +56,7 @@ public class MyServer {
 	}
 	
 	@OnError
-	public void onError(Session session) {
+	public void onError(Session session, Throwable tt) {
 		System.out.println("onError");
 	}
 	
