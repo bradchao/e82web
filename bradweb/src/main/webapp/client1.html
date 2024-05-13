@@ -15,6 +15,7 @@
 				webSocket.onopen = function(){
 					console.log("OPEN");
 					let message = {
+						init : true
 					};
 					webSocket.send(JSON.stringify(message));					
 				};
@@ -41,6 +42,11 @@
 					//console.log("down:" + x + " x " + y);
 					
 					let message = {
+						init : false,
+						isNewLine : true,
+						x : x,
+						y : y
+						
 					};
 					webSocket.send(JSON.stringify(message));					
 					
@@ -56,6 +62,10 @@
 						//console.log("move:" + x + " x " + y);
 						
 						let message = {
+							init : false,
+							isNewLine : false,
+							x : x,
+							y : y							
 						};
 						webSocket.send(JSON.stringify(message));					
 						

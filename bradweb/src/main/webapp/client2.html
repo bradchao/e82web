@@ -20,8 +20,12 @@
 					
 				};
 				webSocket.onmessage = function(event){
-					
-					
+					let mesgObj = JSON.parse(event.data);
+					if (mesgObj.isNewLine){
+						moveTo(mesgObj.x, mesgObj.y);
+					}else{
+						drawLine(mesgObj.x, mesgObj.y);
+					}
 				};				
 				
 				
@@ -31,13 +35,13 @@
 				
 
 				
-				function moveTo(){
+				function moveTo(x, y){
 					ctx.beginPath();
 					ctx.lineWidth = 4;
 					ctx.moveTo(x,y);
 				}	
 				
-				function drawLine(){
+				function drawLine(x, y){
 					ctx.lineTo(x, y);
 					ctx.stroke();					
 				}

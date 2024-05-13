@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
+import org.json.JSONObject;
+
 import tw.brad.apis.WSClient;
 
 @ServerEndpoint("/mycenter")
@@ -35,6 +37,36 @@ public class MyCenter {
 	
 	@OnMessage
 	public void onMessage(String mesg, Session fromSession) {
+		System.out.println(mesg);
+		
+		JSONObject root = new JSONObject(mesg);		//
+		if (root.getBoolean("init")) {
+			for (WSClient wsClient : users) {
+				if (wsClient.getSession().equals(fromSession)) {
+					wsClient.setClient1(true);
+					break;
+				}
+			}			
+		}else {
+			// 製作 JSONObject, 發送給 client2
+			JSONObject sendObj = new JSONObject();
+			sendObj.put("isNewLine", root.getBoolean("isNewLine"));
+			sendObj.put("x", root.getInt("x"));
+			sendObj.put("y", root.getInt("y"));
+			
+			for (WSClient user : users) {
+				if (!user.isClient1()) {
+					try {
+						user.getSession().getBasicRemote().sendText(sendObj.toString());
+					} catch (IOException e) {
+						System.out.println(e);
+					}
+				}
+			}
+			
+			
+		}
+		
 		
 	}
 	
