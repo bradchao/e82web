@@ -39,6 +39,7 @@
 				
 				
 			}
+			// account=brad; passwd=123; remember=true
 		
 			function beforeSubmit(){
 				let account = document.getElementById("account").value;
@@ -50,7 +51,7 @@
 					document.cookie = "passwd = " + passwd;
 					document.cookie = "remember = " + isRemember;
 				}else{
-					var cookies = document.cookie.splite(";");
+					var cookies = document.cookie.split(";");
 					for (var i=0; i<cookies.length; i++){
 						var setting = cookies[i].split("=");
 						document.cookie = setting[0].trim() + " = ;expires = Thu, 01 Jan 1970 00:00:00 UTC"; 
