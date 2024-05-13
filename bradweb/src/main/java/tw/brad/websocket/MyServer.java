@@ -21,7 +21,7 @@ public class MyServer {
 //		if (!users.containsValue(session)) {
 //			users.put(session.getId(), session);
 //		}
-		//System.out.println(session.getBasicRemote().);
+		System.out.println(session.getRequestURI().getHost());
 		if (sessions.add(session)) {
 			users.put(session.getId(), session);
 		}

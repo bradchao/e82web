@@ -13,6 +13,7 @@ window.onload = function(){
 	
 	send.addEventListener("click",function(){
 		
+		webSocket.send("haha");
 	});
 	
 	start.style.display = "block";
